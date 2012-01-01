@@ -492,7 +492,7 @@
 .end method
 
 .method private static beginShutdownSequence(Landroid/content/Context;)V
-    .locals 8
+    .locals 10
     .parameter "context"
 
     .prologue
@@ -547,6 +547,13 @@
 
     .line 360
     .local v1, pd:Landroid/app/ProgressDialog;
+	
+	sget v8, Lcom/android/internal/app/ShutdownThread;->mReboot:I
+
+    const/4 v9, 0x0
+
+    if-ne v8, v9, :cond_17
+	
     const v2, 0x10401c9
 
     invoke-virtual {p0, v2}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
@@ -563,8 +570,29 @@
     move-result-object v2
 
     invoke-virtual {v1, v2}, Landroid/app/ProgressDialog;->setMessage(Ljava/lang/CharSequence;)V
+	
+	goto :goto_11
+	
+	:cond_17
+	
+    const v2, 0x104052e
 
-    .line 362
+    invoke-virtual {p0, v2}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroid/app/ProgressDialog;->setTitle(Ljava/lang/CharSequence;)V
+
+    .line 361
+    const v2, 0x1040531
+
+    invoke-virtual {p0, v2}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroid/app/ProgressDialog;->setMessage(Ljava/lang/CharSequence;)V
+	
+	:goto_11
     invoke-virtual {v1, v4}, Landroid/app/ProgressDialog;->setIndeterminate(Z)V
 
     .line 363
@@ -840,13 +868,12 @@
 
     return-void
 
-    :cond_1
-    const-string v4, "arm11_fota"
-
+    :cond_1	
+	const-string/jumbo v4, "recovery"
+		
     invoke-static {v4}, Landroid/os/Power;->reboot(Ljava/lang/String;)V
 
     return-void
-
     .line 683
     :catch_0
     move-exception v0
@@ -995,6 +1022,12 @@
     invoke-virtual {v2, v3}, Landroid/app/AlertDialog$Builder;->setIcon(I)Landroid/app/AlertDialog$Builder;
 
     move-result-object v2
+	
+	sget v5, Lcom/android/internal/app/ShutdownThread;->mReboot:I
+
+    const/4 v6, 0x0
+
+    if-ne v5, v6, :cond_18
 
     const v3, 0x10401c9
 
@@ -1007,7 +1040,24 @@
     invoke-virtual {v2, v3}, Landroid/app/AlertDialog$Builder;->setMessage(I)Landroid/app/AlertDialog$Builder;
 
     move-result-object v2
+	
+	goto :goto_10
+	
+	:cond_18
+	
+    const v3, 0x104052e
 
+    invoke-virtual {v2, v3}, Landroid/app/AlertDialog$Builder;->setTitle(I)Landroid/app/AlertDialog$Builder;
+
+    move-result-object v2
+
+    const v3, 0x1040532
+
+    invoke-virtual {v2, v3}, Landroid/app/AlertDialog$Builder;->setMessage(I)Landroid/app/AlertDialog$Builder;
+
+    move-result-object v2
+	
+	:goto_10
     const v3, 0x1040013
 
     new-instance v4, Lcom/android/internal/app/ShutdownThread$1;

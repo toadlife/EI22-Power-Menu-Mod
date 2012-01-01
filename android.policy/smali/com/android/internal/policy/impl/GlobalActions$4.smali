@@ -50,6 +50,10 @@
 
     const/4 v1, 0x1
 
+    const/4 p0, 0x0
+
+    sput p0, Lcom/android/internal/app/ShutdownThread;->mReboot:I
+
     invoke-static {v0, v1}, Lcom/android/internal/app/ShutdownThread;->shutdown(Landroid/content/Context;Z)V
 
     .line 240

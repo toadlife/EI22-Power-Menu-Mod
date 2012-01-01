@@ -2933,6 +2933,8 @@
     <public type="string" name="reboot" id="0x0104052e" />
     <public type="string" name="reboot_recovery" id="0x0104052f" />
     <public type="string" name="reboot_download" id="0x01040530" />
+    <public type="string" name="reboot_progress" id="0x01040531" />
+    <public type="string" name="reboot_confirm" id="0x01040532" />
     <public type="string" name="permlab_accessUsb" id="0x0104052c" />
     <public type="string" name="permdesc_accessUsb" id="0x0104052d" />
     <public type="dimen" name="app_icon_size" id="0x01050000" />
